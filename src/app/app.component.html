@@ -1,5 +1,55 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div class="main-header">
+  <h3 class="centered">CHECK - IN</h3>
+  <img src="../assets/img/af_pattern_bg.png">
+</div>
+<div class="check-in-trip">
+  <div class="header">
+    <h1>RETRIVE YOUR BOOKING</h1>
+  </div>
+  <div class="sub-header">
+    <h3>You can retrive your booking by filling out your family name and the booking code in your booking confirmation.
+  </h3>
+  </div>
+  <form [formGroup]="tripFinder" (ngSubmit)="onSubmit(tripFinder)" #formDir="ngForm" >
+    <div class="booking-fields">
+      <label class="booking-label">Booking code</label>
+      <input formControlName="code" id="code" class="booking-textbox" type="text">
+      <p class="error-msg" *ngIf="tripFinder.get('code').hasError('minlength')">
+        code should be between 5 to 6 charecters.
+      </p>
+      <p class="error-msg" *ngIf="tripFinder.get('code').hasError('maxlength')">
+        code should be between 5 to 6 charecters.
+      </p>
+      <p class="error-msg" *ngIf="tripFinder.get('code').hasError('pattern')">
+        please enter a valid booking code.
+      </p>
+      <p id="codeMandate" class="error-msg" *ngIf="formDir.submitted  && tripFinder.get('code').hasError('required')">
+        please enter a valid booking code.
+      </p>
+    </div>
+    <div class="booking-fields">
+      <label class="booking-label">Family name</label>
+      <input formControlName="familyName" id="familyName" class="booking-textbox" type="text">
+      <p class="error-msg" *ngIf="tripFinder.get('familyName').hasError('minlength')">
+        family name should be between 2 to 30 charecters.
+      </p>
+      <p class="error-msg" *ngIf="tripFinder.get('familyName').hasError('maxlength')">
+        code should be between 2 to 30 charecters.
+      </p>
+      <p class="error-msg" *ngIf="tripFinder.get('familyName').hasError('pattern')">
+        please enter a valid family name.
+      </p>
+      <p id="familynameMandate" class="error-msg" *ngIf="formDir.submitted  && tripFinder.get('familyName').hasError('required')">
+        please enter a valid family name.
+      </p>
+    </div>
+    <div>
+      <button class="booking-button" id="retriveBooking" type="submit">Retrieve booking</button>
+    </div>
+  </form>
+</div>
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
@@ -16,5 +66,4 @@
   <li>
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
-</ul>
-
+</ul> -->
