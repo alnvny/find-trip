@@ -15,12 +15,10 @@ describe('AppComponent', () => {
 
 it('form valid when sumbitted ', () => {
   const fixture = TestBed.createComponent(AppComponent);
-  const familynameInput = fixture.debugElement.query(By.css('#familyName'));
-  const codeInput = fixture.debugElement.query(By.css('#code'));
-  let familyname = familynameInput.nativeElement;
-  let code = codeInput.nativeElement;
-  familyname.value = "Allan";
-  code.value = "789GH";
+  const familynameInput = fixture.debugElement.query(By.css('#familyName')).nativeElement;
+  const codeInput = fixture.debugElement.query(By.css('#code')).nativeElement;
+  familynameInput.value = "Allan";
+  codeInput.value = "789GH";
   const familynameValue = fixture.debugElement.query(By.css('#familynameMandate'));
   const codeValue = fixture.debugElement.query(By.css('#codeMandate'));
   expect(familynameValue).toBe(null);
