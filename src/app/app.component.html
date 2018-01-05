@@ -14,7 +14,7 @@
   <form [formGroup]="tripFinder" (ngSubmit)="onSubmit(tripFinder)" #formDir="ngForm" >
     <div class="booking-fields">
       <label class="booking-label">Booking code</label>
-      <input formControlName="code" id="code" class="booking-textbox" type="text">
+      <input (blur)="onBlur()" (focus)="onFocus()" formControlName="code" id="code" class="booking-textbox" type="text">
       <p class="error-msg" *ngIf="tripFinder.get('code').hasError('minlength')">
         code should be between 5 to 6 charecters.
       </p>
