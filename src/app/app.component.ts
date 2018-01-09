@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
+import { HttpClient  } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms'
 export class AppComponent implements OnInit{
   tripFinder : 	FormGroup;
 
-constructor(private fb: FormBuilder) {}
+constructor(private fb: FormBuilder, public http: HttpClient){}
+
 
   ngOnInit(){
   	this.tripFinder = this.fb.group({
@@ -19,6 +21,8 @@ constructor(private fb: FormBuilder) {}
   	}
 
   onSubmit(form: FormGroup) {
-
+    this.http.get('../assets/mock/mock.json').subscribe(data => {
+      console.log(data);
+    });
   }
 }
