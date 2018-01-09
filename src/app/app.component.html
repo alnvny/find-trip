@@ -11,10 +11,10 @@
     <h3>You can retrive your booking by filling out your family name and the booking code in your booking confirmation.
   </h3>
   </div>
-  <form [formGroup]="tripFinder" (ngSubmit)="onSubmit(tripFinder)" #formDir="ngForm" >
+  <form [formGroup]="tripFinder" (ngSubmit)="onSubmit(tripFinder)" #formDir="ngForm">
     <div class="booking-fields">
       <label class="booking-label">Booking code</label>
-      <input autofocus  formControlName="code" id="code" class="booking-textbox" type="text">
+      <input autofocus formControlName="code" id="code" class="booking-textbox" type="text">
       <p class="error-msg" *ngIf="tripFinder.get('code').hasError('minlength')">
         code should be between 5 to 6 charecters.
       </p>
@@ -48,5 +48,11 @@
       <button class="booking-button" id="retriveBooking" type="submit">Retrieve booking</button>
     </div>
   </form>
+  <div *ngIf="dataMatched">
+    <h4>Orgin Location : {{originCityName}}, {{originCountryName}}</h4>
+    <h4>Destination Location: {{destinationCityName}}, {{destinationCountryName}}</h4>
+  </div>
+  <div *ngIf="dataMissMatch">
+    <h4>No Matches found.</h4>
+  </div>
 </div>
-

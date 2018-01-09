@@ -8,7 +8,15 @@ import { HttpClient  } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  tripFinder : 	FormGroup;
+  tripFinder : FormGroup;
+  dataObject: any;
+  bookingCode: string;
+  originCityName: string;
+  originCountryName: string;
+  destinationCityName: string;
+  destinationCountryName: string;
+  dataMatched: boolean = false;
+  dataMissMatch:boolean = false;
 
 constructor(private fb: FormBuilder, public http: HttpClient){}
 
@@ -21,8 +29,29 @@ constructor(private fb: FormBuilder, public http: HttpClient){}
   	}
 
   onSubmit(form: FormGroup) {
+    if(form.valid){
     this.http.get('../assets/mock/mock.json').subscribe(data => {
-      console.log(data);
+      this.dataObject = data;
+      let getBookingCode  = this.dataObject.bookingCode;
+      let getFamilyName  = this.dataObject.passengers.lastName;
+      let formBookingCode = form.value.code;
+      let formFamilyName = form.value.familyName;
+      if(formBookingCode === getBookingCode && formFamilyName === getFamilyName){
+       this.dataMatched =true;
+       this.dataMissMatch = false;
+       this.originCityName = this.dataObject.itinerary.connections[0].origin.city.name;
+       this.originCountryName = this.dataObject.itinerary.connections[0].origin.city.country.name;
+       this.destinationCityName = this.dataObject.itinerary.connections[0].destination.city.name;
+       this.destinationCountryName = this.dataObject.itinerary.connections[0].destination.city.country.name;
+      }else{
+        this.dataMatched = false;
+        this.dataMissMatch = true;
+      }
     });
+  }else{
+        this.dataMatched = false;
+        this.dataMissMatch = false;
   }
+  }
+
 }
